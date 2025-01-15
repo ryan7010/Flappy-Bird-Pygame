@@ -7,10 +7,6 @@ pygame.display.set_caption("Game")
 clock = pygame.time.Clock()
 cloned_images = []
 
-# Timer to track intervals
-last_clone_time = pygame.time.get_ticks()
-clone_interval = 2000 
-
 #get assets
 bird = pygame.image.load("assets/bird.png")
 pipe = pygame.image.load("assets/pipe.jpg")
@@ -54,14 +50,6 @@ while running:
     x_p-=speed_p
     x_p2-=speed_p
 
-    current_time = pygame.time.get_ticks()
-    if current_time - last_clone_time >= clone_interval:
-        # Clone the image and add to the list
-        cloned_images.append(pipe.copy())
-        cloned_images.append(pipe2.copy())
-        last_clone_time = current_time  
-
-
     if keys[pygame.K_SPACE]:
         y=y-6*speed
 
@@ -76,9 +64,6 @@ while running:
 
     display.blit(pipe,(x_p,y_p))
     display.blit(pipe2, (x_p2,y_p2) )   
-    
-    for i, img in enumerate(cloned_images):
-        display.blit(img, (100 + (i * 50), 100))
 
     pygame.display.flip()
     pygame.time.Clock().tick(60)
